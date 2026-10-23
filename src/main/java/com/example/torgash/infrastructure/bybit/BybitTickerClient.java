@@ -1,9 +1,8 @@
 package com.example.torgash.infrastructure.bybit;
 
+import com.example.torgash.infrastructure.bybit.dto.BybitTickersResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-
-import java.util.List;
 
 @Service
 public class BybitTickerClient {
@@ -20,7 +19,8 @@ public class BybitTickerClient {
                 .get()
                 .uri("/v5/market/tickers?category=spot&symbol=BTCUSDT")
                 .retrieve()
-                .body(String.class);
-        System.out.println(request);
+                .body(BybitTickersResponse.class);
+        System.out.println(request.result.list.get(0).symbol);
+        System.out.println(request.result.list.get(0).lastPrice);
     }
 }
